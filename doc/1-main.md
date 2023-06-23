@@ -1,3 +1,3 @@
-# aws-service
+# aws-service-config
 
-AWS service utilities.
+Abstracts service connections into a class.

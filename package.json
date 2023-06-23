@@ -1,19 +1,19 @@
 {
-  "name": "@veterancrowd/aws-service",
+  "name": "@veterancrowd/aws-service-config",
   "version": "0.0.0",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/veterancrowd/aws-service"
+    "url": "https://github.com/veterancrowd/aws-service-config"
   },
   "author": "Jason G. Williscroft",
   "bugs": {
-    "url": "https://github.com/veterancrowd/aws-service/issues"
+    "url": "https://github.com/veterancrowd/aws-service-config/issues"
   },
-  "description": "AWS service utilities.",
-  "homepage": "https://github.com/veterancrowd/aws-service#readme",
+  "description": "Abstracts service connections into a class.",
+  "homepage": "https://github.com/veterancrowd/aws-service-config#readme",
   "keywords": [
     "aws"
   ],
