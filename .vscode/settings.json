@@ -1,0 +1,25 @@
+{
+  "git.autofetch": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.enableSmartCommit": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "prettier.useTabs": false,
+  "prettier.singleQuote": true,
+  "editor.tabSize": 2,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.accessibilitySupport": "off",
+  "javascript.preferences.importModuleSpecifierEnding": "minimal",
+  "[markdown]": {
+    "editor.wordWrap": "bounded"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "yaml"],
+  "mochaExplorer.files": "./**/*.test.!(*.*)",
+  "mochaExplorer.env": {
+    "AWS_XRAY_CONTEXT_MISSING": "IGNORE_ERROR"
+  }
+}

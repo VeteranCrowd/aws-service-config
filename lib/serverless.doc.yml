@@ -1,0 +1,125 @@
+globals:
+  aliases:
+    EntityPropertiesArchived: &EntityPropertiesArchived
+      archived:
+        type: number
+        description: Archived timestamp in millis.
+
+    EntityPropertiesEnabled: &EntityPropertiesEnabled
+      enabled:
+        type: number
+        description: Enabled timestamp in millis.
+
+    EntityPropertiesSystem: &EntityPropertiesSystem
+      created:
+        type: number
+        description: Created timestamp in millis.
+      updated:
+        type: number
+        description: Updated timestamp in millis.
+      updater:
+        type: string
+        description: userId or stack name of last updater.
+
+    RequestParamsArchive: &RequestParamsArchive
+      archive:
+        type: boolean
+        description: True to archive, false to unarchive.
+
+    RequestParamsEnable: &RequestParamsEnable
+      enable:
+        type: boolean
+        description: True to enable, false to disable.
+
+    SecuritySchemeCognito: &SecuritySchemeCognito
+      - cognito:
+          - openid
+
+    SecuritySchemePrivate: &SecuritySchemePrivate
+      - private: []
+
+  documentation:
+    models:
+      # eslint-disable yml/indent
+      - &EmptyResponse
+        name: EmptyResponse
+        description: Empty response body.
+        content:
+          application/json:
+            schema:
+              $schema: 'http://json-schema.org/draft-04/schema#'
+              type: object
+      # eslint-enable yml/indent
+
+    securitySchemes: &SecuritySchemes
+      private:
+        type: apiKey
+        name: X-API-Key
+        in: header
+      cognito:
+        type: oauth2
+        flows:
+          implicit:
+            authorizationUrl: https://${env:NEXTAUTH_COGNITO_DOMAIN}/oauth2/authorize
+            scopes:
+              openid: OpenId authentication
+    version: &Version ${env:API_VERSION}
+
+  endpoints:
+    public: &EndpointsPublicCommon
+      doc-openapi-get:
+        summary: Get OpenAPI docs
+        description: Get JSON-formatted OpenAPI documentation.
+        methodResponses:
+          - statusCode: 200
+            responseBody:
+              description: JSON-formatted OpenAPI documentation.
+            responseModels:
+              application/json:
+                schema:
+                  type: object
+        operationId: publicGetDocOpenapi
+        queryParams:
+          - name: excludeEndpoints
+            description:
+              "A tilde (~) delimited list of endpoint tags. Endpoints with these tags will be excluded from the result. \
+              This parameter is mutually exclusive with `includeEndpoints`."
+            schema:
+              type: string
+          - name: excludeTags
+            description:
+              "A tilde (~) delimited list of endpoint tags. These tags will be stripped from the result. \
+              This parameter is mutually exclusive with `includeTags`."
+            schema:
+              type: string
+          - name: includeEndpoints
+            description:
+              "A tilde (~) delimited list of endpoint tags. Only endpoints with these tags will be included in the result. \
+              This parameter is mutually exclusive with `excludeEndpoints`."
+            schema:
+              type: string
+          - name: includeTags
+            description:
+              "A tilde (~) delimited list of endpoint tags. All other tags will be stripped from the result. \
+              This parameter is mutually exclusive with `excludeTags`."
+            schema:
+              type: string
+        tags:
+          - Public
+          - Doc
+
+      doc-postman-get:
+        summary: Get Postman docs
+        description: Get JSON-formatted Postman documentation.
+        methodResponses:
+          - statusCode: 200
+            responseBody:
+              description: JSON-formatted Postman documentation.
+            responseModels:
+              application/json:
+                schema:
+                  type: object
+        operationId: publicGetDocPostman
+        tags:
+          - Public
+          - Doc
