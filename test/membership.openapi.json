@@ -1,0 +1,1368 @@
+{
+  "openapi": "3.0.0",
+  "components": {
+    "schemas": {
+      "MembershipArchivePatchRequest": {
+        "type": "object",
+        "properties": {
+          "membershipId": {
+            "type": "string",
+            "description": "Unique Membership identifier."
+          },
+          "archive": {
+            "type": "boolean",
+            "description": "True to archive, false to unarchive."
+          }
+        },
+        "required": [
+          "membershipId",
+          "archive"
+        ],
+        "additionalProperties": false
+      },
+      "MembershipGetResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "membershipId": {
+              "type": "string",
+              "description": "Unique Membership identifier."
+            },
+            "log": {
+              "type": "array",
+              "description": "Log of status changes.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "number",
+                    "description": "Timestamp in millis."
+                  },
+                  "data": {
+                    "description": "Log entry data.",
+                    "oneOf": [
+                      {
+                        "type": "object"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "validatorId": {
+                    "type": "string",
+                    "description": "Validator id."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Log entry message."
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Current membership status.",
+                    "enum": [
+                      "new",
+                      "validating",
+                      "valid",
+                      "invalid",
+                      "validationFailed"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "message": {
+              "type": "string",
+              "description": "Log entry message."
+            },
+            "groupId": {
+              "type": "string",
+              "description": "Group id."
+            },
+            "userId": {
+              "type": "string",
+              "description": "User id."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current membership status.",
+              "enum": [
+                "new",
+                "validating",
+                "valid",
+                "invalid",
+                "validationFailed"
+              ]
+            },
+            "archived": {
+              "type": "number",
+              "description": "Archived timestamp in millis."
+            },
+            "created": {
+              "type": "number",
+              "description": "Created timestamp in millis."
+            },
+            "updated": {
+              "type": "number",
+              "description": "Updated timestamp in millis."
+            },
+            "updater": {
+              "type": "string",
+              "description": "userId or stack name of last updater."
+            }
+          },
+          "required": [
+            "created",
+            "groupId",
+            "membershipId",
+            "status",
+            "updated",
+            "updater",
+            "userId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "MembershipListResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number",
+            "description": "Total number of records matching the search criteria."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "membershipId": {
+                  "type": "string",
+                  "description": "Unique Membership identifier."
+                },
+                "log": {
+                  "type": "array",
+                  "description": "Log of status changes.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "timestamp": {
+                        "type": "number",
+                        "description": "Timestamp in millis."
+                      },
+                      "data": {
+                        "description": "Log entry data.",
+                        "oneOf": [
+                          {
+                            "type": "object"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "validatorId": {
+                        "type": "string",
+                        "description": "Validator id."
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Log entry message."
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Current membership status.",
+                        "enum": [
+                          "new",
+                          "validating",
+                          "valid",
+                          "invalid",
+                          "validationFailed"
+                        ]
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Log entry message."
+                },
+                "groupId": {
+                  "type": "string",
+                  "description": "Group id."
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "User id."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Current membership status.",
+                  "enum": [
+                    "new",
+                    "validating",
+                    "valid",
+                    "invalid",
+                    "validationFailed"
+                  ]
+                },
+                "archived": {
+                  "type": "number",
+                  "description": "Archived timestamp in millis."
+                },
+                "created": {
+                  "type": "number",
+                  "description": "Created timestamp in millis."
+                },
+                "updated": {
+                  "type": "number",
+                  "description": "Updated timestamp in millis."
+                },
+                "updater": {
+                  "type": "string",
+                  "description": "userId or stack name of last updater."
+                }
+              },
+              "required": [
+                "created",
+                "groupId",
+                "membershipId",
+                "status",
+                "updated",
+                "updater",
+                "userId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "pageKeys": {
+            "type": "string",
+            "description": "Compressed map of shardKeys to pageKeys. Empty string indicates no more pages."
+          }
+        },
+        "required": [
+          "count",
+          "items",
+          "pageKeys"
+        ],
+        "additionalProperties": false
+      },
+      "MembershipPostRequestCognito": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "Group id."
+          },
+          "userId": {
+            "type": "string",
+            "description": "User id."
+          }
+        },
+        "required": [
+          "groupId"
+        ],
+        "additionalProperties": false
+      },
+      "MembershipPostRequestPrivate": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "Group id."
+          },
+          "userId": {
+            "type": "string",
+            "description": "User id."
+          }
+        },
+        "required": [
+          "groupId",
+          "userId"
+        ],
+        "additionalProperties": false
+      },
+      "MembershipPatchRequest": {
+        "type": "object",
+        "properties": {
+          "membershipId": {
+            "type": "string",
+            "description": "Unique Membership identifier."
+          },
+          "data": {
+            "description": "Log entry data.",
+            "oneOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "validatorId": {
+            "type": "string",
+            "description": "Validator id."
+          },
+          "message": {
+            "type": "string",
+            "description": "Log entry message."
+          },
+          "status": {
+            "type": "string",
+            "description": "Current membership status.",
+            "enum": [
+              "new",
+              "validating",
+              "valid",
+              "invalid",
+              "validationFailed"
+            ]
+          }
+        },
+        "required": [
+          "membershipId",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "MembershipRecordResponse": {
+        "type": "object",
+        "properties": {
+          "membershipId": {
+            "type": "string",
+            "description": "Unique Membership identifier."
+          },
+          "log": {
+            "type": "array",
+            "description": "Log of status changes.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "number",
+                  "description": "Timestamp in millis."
+                },
+                "data": {
+                  "description": "Log entry data.",
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "validatorId": {
+                  "type": "string",
+                  "description": "Validator id."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Log entry message."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Current membership status.",
+                  "enum": [
+                    "new",
+                    "validating",
+                    "valid",
+                    "invalid",
+                    "validationFailed"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Log entry message."
+          },
+          "groupId": {
+            "type": "string",
+            "description": "Group id."
+          },
+          "userId": {
+            "type": "string",
+            "description": "User id."
+          },
+          "status": {
+            "type": "string",
+            "description": "Current membership status.",
+            "enum": [
+              "new",
+              "validating",
+              "valid",
+              "invalid",
+              "validationFailed"
+            ]
+          },
+          "archived": {
+            "type": "number",
+            "description": "Archived timestamp in millis."
+          },
+          "created": {
+            "type": "number",
+            "description": "Created timestamp in millis."
+          },
+          "updated": {
+            "type": "number",
+            "description": "Updated timestamp in millis."
+          },
+          "updater": {
+            "type": "string",
+            "description": "userId or stack name of last updater."
+          }
+        },
+        "required": [
+          "created",
+          "groupId",
+          "membershipId",
+          "status",
+          "updated",
+          "updater",
+          "userId"
+        ],
+        "additionalProperties": false
+      },
+      "excludeEndpoints": {
+        "type": "string"
+      },
+      "excludeTags": {
+        "type": "string"
+      },
+      "includeEndpoints": {
+        "type": "string"
+      },
+      "includeTags": {
+        "type": "string"
+      },
+      "86fe37ae-6e6f-43e6-854f-a4050724d557": {
+        "type": "object"
+      },
+      "Access-Control-Allow-Origin": {
+        "type": "string",
+        "default": "*",
+        "example": "https://developer.mozilla.org"
+      },
+      "Access-Control-Allow-Credentials": {
+        "type": "boolean",
+        "default": true
+      },
+      "7184c900-d9e2-4570-acdb-a38f5295b219": {
+        "type": "object"
+      },
+      "membershipId": {
+        "type": "string"
+      },
+      "createdFrom": {
+        "type": "number"
+      },
+      "createdTo": {
+        "type": "number"
+      },
+      "groupId": {
+        "type": "string"
+      },
+      "isArchived": {
+        "type": "boolean"
+      },
+      "limit": {
+        "type": "number"
+      },
+      "pageKeys": {
+        "type": "string"
+      },
+      "sort": {
+        "type": "string",
+        "enum": [
+          "created",
+          "updated"
+        ]
+      },
+      "sortOrder": {
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ]
+      },
+      "updatedFrom": {
+        "type": "number"
+      },
+      "updatedTo": {
+        "type": "number"
+      },
+      "userId": {
+        "type": "string"
+      }
+    },
+    "securitySchemes": {
+      "private": {
+        "type": "apiKey",
+        "name": "X-API-Key",
+        "in": "header"
+      },
+      "cognito": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://user-v0-bali.veterancrowd.com/oauth2/authorize",
+            "scopes": {
+              "openid": "OpenId authentication"
+            }
+          }
+        }
+      },
+      "x-api-key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  },
+  "info": {
+    "title": "api-membership",
+    "description": "Membership API",
+    "version": "v0"
+  },
+  "paths": {
+    "/doc/openapi": {
+      "get": {
+        "summary": "Get OpenAPI docs",
+        "description": "Get JSON-formatted OpenAPI documentation.",
+        "operationId": "publicGetDocOpenapi",
+        "parameters": [
+          {
+            "name": "excludeEndpoints",
+            "in": "query",
+            "description": "A tilde (~) delimited list of endpoint tags. Endpoints with these tags will be excluded from the result. This parameter is mutually exclusive with `includeEndpoints`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/excludeEndpoints"
+            }
+          },
+          {
+            "name": "excludeTags",
+            "in": "query",
+            "description": "A tilde (~) delimited list of endpoint tags. These tags will be stripped from the result. This parameter is mutually exclusive with `includeTags`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/excludeTags"
+            }
+          },
+          {
+            "name": "includeEndpoints",
+            "in": "query",
+            "description": "A tilde (~) delimited list of endpoint tags. Only endpoints with these tags will be included in the result. This parameter is mutually exclusive with `excludeEndpoints`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/includeEndpoints"
+            }
+          },
+          {
+            "name": "includeTags",
+            "in": "query",
+            "description": "A tilde (~) delimited list of endpoint tags. All other tags will be stripped from the result. This parameter is mutually exclusive with `excludeTags`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/includeTags"
+            }
+          }
+        ],
+        "tags": [
+          "Public",
+          "Doc"
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON-formatted OpenAPI documentation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/86fe37ae-6e6f-43e6-854f-a4050724d557"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "OpenApi documentation get endpoint handler."
+    },
+    "/doc/postman": {
+      "get": {
+        "summary": "Get Postman docs",
+        "description": "Get JSON-formatted Postman documentation.",
+        "operationId": "publicGetDocPostman",
+        "parameters": [],
+        "tags": [
+          "Public",
+          "Doc"
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON-formatted Postman documentation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/7184c900-d9e2-4570-acdb-a38f5295b219"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Postman documentation get endpoint handler."
+    },
+    "/my/membership": {
+      "get": {
+        "summary": "Get Membership",
+        "description": "Retrieve a Membership record by `membershipId`.\n\nValid request requires:\n\n* `membershipId` Membership record exists.\n\n* One of:\n\n  * Authenticated User is ApplicationManager.\n\n  * Authenticated User is User corresponding to Membership `userId`.",
+        "operationId": "myGetMembership",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "query",
+            "description": "The membershipId of the Membership record to retrieve.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/membershipId"
+            }
+          }
+        ],
+        "tags": [
+          "Cognito",
+          "Membership"
+        ],
+        "security": [
+          {
+            "cognito": [
+              "openid"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership record array.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipGetResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Membership post endpoint handler (Cognito)",
+      "post": {
+        "summary": "Create Membership",
+        "description": "Create a Membership record. `body.userId` defaults to authenticated User.\n\nValid request requires:\n\n* Group with given groupId and User with given userId both exist.\n\n* Membership with given groupId & userId does not already exist.\n\n* One of:\n\n  * Authenticated User is ApplicationManager.\n\n  * Authenticated User is User corresponding to `body.userId`.",
+        "operationId": "myCreateMembership",
+        "parameters": [],
+        "tags": [
+          "Cognito",
+          "Membership"
+        ],
+        "security": [
+          {
+            "cognito": [
+              "openid"
+            ]
+          }
+        ],
+        "requestBody": {
+          "description": "Membership relational properties.",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MembershipPostRequestCognito"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Membership record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/my/membership/archive": {
+      "patch": {
+        "summary": "Archive Membership",
+        "description": "Archive/unarchive a Membership record.\n\nValid request requires:\n\n* `body.membershipId` Membership record exists.\n\n* `body.archive` not equal to current archive state.\n\n* One of:\n\n  * Authenticated User is ApplicationManager.\n\n  * Authenticated User is User corresponding to `body.membershipId`.",
+        "operationId": "myArchiveMembership",
+        "parameters": [],
+        "tags": [
+          "Cognito",
+          "Membership"
+        ],
+        "security": [
+          {
+            "cognito": [
+              "openid"
+            ]
+          }
+        ],
+        "requestBody": {
+          "description": "Membership archive state.",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MembershipArchivePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Membership record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Membership archive patch endpoint handler (Cognito)"
+    },
+    "/my/memberships": {
+      "get": {
+        "summary": "Search Memberships",
+        "description": "Retrieve an array of Membership records by Group or User. If neither `groupId` nor `userId` is specified, `userId` defaults to Authenticated User.\n\nRecords are sorted in descending order by `updated`.\n\nSearch is transparently conducted across all shards. Results are returned in order according to the governing index RANGE key, with the following caveats:\n\n* Paged results across multiple shards are internally sorted by RANGE key but not guaranteed to be in order across shards.\n\n* There may be some overlap at page edges once page results are combined & sorted.\n\nFor best results:\n\n* Sharding can be added to any entity as required! Design under the assumption that all entities will be sharded.\n\n* Progressively integrate new page results into previous results & declaratively sort results prior to display.",
+        "operationId": "mySearchMemberships",
+        "parameters": [
+          {
+            "name": "createdFrom",
+            "in": "query",
+            "description": "From created timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/createdFrom"
+            }
+          },
+          {
+            "name": "createdTo",
+            "in": "query",
+            "description": "To created timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/createdTo"
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "Filter by `groupId`. Either `groupId` or `userId` must be specified.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/groupId"
+            }
+          },
+          {
+            "name": "isArchived",
+            "in": "query",
+            "description": "Filter by archive state.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/isArchived"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Max number of records to return. For sharded queries, this value will be divided by the number of shards for a minimum of 1 record per shard. If not specified, the query will return the default number of records per shard.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/limit"
+            }
+          },
+          {
+            "name": "pageKeys",
+            "in": "query",
+            "description": "A compressed map of shardKeys to pageKeys. This value is returned in the `pageKeys` property of the previous search response body. If omitted, returns the first search page. An empty string indicates no more pages and will always return an empty result set.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/pageKeys"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order. Default is `name`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/sort"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort order. Default is `asc` for `user` sort, `desc` otherwise.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/sortOrder"
+            }
+          },
+          {
+            "name": "updatedFrom",
+            "in": "query",
+            "description": "From updated timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/updatedFrom"
+            }
+          },
+          {
+            "name": "updatedTo",
+            "in": "query",
+            "description": "To updated timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/updatedTo"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Filter by `userId`. Either `userId` or `groupId` must be specified.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/userId"
+            }
+          }
+        ],
+        "tags": [
+          "Cognito",
+          "Membership"
+        ],
+        "security": [
+          {
+            "cognito": [
+              "openid"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership record array & page keys.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipListResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Membership search endpoint handler (Cognito)"
+    },
+    "/private/membership": {
+      "get": {
+        "summary": "Get Membership",
+        "description": "Retrieve a Membership record by `membershipId`.\n\nValid request requires:\n\n* `membershipId` Membership record exists.\n\n* One of:\n\n  * Authenticated User is ApplicationManager.\n\n  * Authenticated User is User corresponding to Membership `userId`.",
+        "operationId": "privateGetMembership",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "query",
+            "description": "The membershipId of the Membership record to retrieve.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/membershipId"
+            }
+          }
+        ],
+        "tags": [
+          "Private",
+          "Membership"
+        ],
+        "security": [
+          {
+            "private": []
+          },
+          {
+            "x-api-key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership record array.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipGetResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Membership post endpoint handler (private)",
+      "patch": {
+        "summary": "Update Membership",
+        "description": "Update a Membership record.\n\nValid request requires:\n\n* `body.membershipId` Membership record exists.",
+        "operationId": "privateUpdateMembership",
+        "parameters": [],
+        "tags": [
+          "Private",
+          "Membership"
+        ],
+        "security": [
+          {
+            "private": []
+          },
+          {
+            "x-api-key": []
+          }
+        ],
+        "requestBody": {
+          "description": "Editable Membership properties.",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MembershipPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Membership record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Membership",
+        "description": "Create a Membership record.",
+        "operationId": "privateCreateMembership",
+        "parameters": [],
+        "tags": [
+          "Private",
+          "Membership"
+        ],
+        "security": [
+          {
+            "private": []
+          },
+          {
+            "x-api-key": []
+          }
+        ],
+        "requestBody": {
+          "description": "Membership relational properties.",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MembershipPostRequestPrivate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Membership record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/private/membership/archive": {
+      "patch": {
+        "summary": "Archive Membership",
+        "description": "Archive a Membership record.\n\nValid request requires:\n* `body.membershipId` Membership record exists.\n\n* `body.archive` not equal to current archive state.",
+        "operationId": "privateArchiveMembership",
+        "parameters": [],
+        "tags": [
+          "Private",
+          "Membership"
+        ],
+        "security": [
+          {
+            "private": []
+          },
+          {
+            "x-api-key": []
+          }
+        ],
+        "requestBody": {
+          "description": "Membership archive state.",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MembershipArchivePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Membership record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Membership archive patch endpoint handler (private)"
+    },
+    "/private/memberships": {
+      "get": {
+        "summary": "Search Memberships",
+        "description": "Retrieve an array of Membership records by Group or User. If neither `groupId` nor `userId` is specified, `userId` defaults to Authenticated User.\n\nRecords are sorted in descending order by `updated`.\n\nSearch is transparently conducted across all shards. Results are returned in order according to the governing index RANGE key, with the following caveats:\n\n* Paged results across multiple shards are internally sorted by RANGE key but not guaranteed to be in order across shards.\n\n* There may be some overlap at page edges once page results are combined & sorted.\n\nFor best results:\n\n* Sharding can be added to any entity as required! Design under the assumption that all entities will be sharded.\n\n* Progressively integrate new page results into previous results & declaratively sort results prior to display.",
+        "operationId": "privateSearchMemberships",
+        "parameters": [
+          {
+            "name": "createdFrom",
+            "in": "query",
+            "description": "From created timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/createdFrom"
+            }
+          },
+          {
+            "name": "createdTo",
+            "in": "query",
+            "description": "To created timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/createdTo"
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "Filter by `groupId`. Either `groupId` or `userId` must be specified.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/groupId"
+            }
+          },
+          {
+            "name": "isArchived",
+            "in": "query",
+            "description": "Filter by archive state.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/isArchived"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Max number of records to return. For sharded queries, this value will be divided by the number of shards for a minimum of 1 record per shard. If not specified, the query will return the default number of records per shard.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/limit"
+            }
+          },
+          {
+            "name": "pageKeys",
+            "in": "query",
+            "description": "A compressed map of shardKeys to pageKeys. This value is returned in the `pageKeys` property of the previous search response body. If omitted, returns the first search page. An empty string indicates no more pages and will always return an empty result set.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/pageKeys"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order. Default is `name`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/sort"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort order. Default is `asc` for `user` sort, `desc` otherwise.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/sortOrder"
+            }
+          },
+          {
+            "name": "updatedFrom",
+            "in": "query",
+            "description": "From updated timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/updatedFrom"
+            }
+          },
+          {
+            "name": "updatedTo",
+            "in": "query",
+            "description": "To updated timestamp.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/updatedTo"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Filter by `userId`. Either `userId` or `groupId` must be specified.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/userId"
+            }
+          }
+        ],
+        "tags": [
+          "Private",
+          "Membership"
+        ],
+        "security": [
+          {
+            "private": []
+          },
+          {
+            "x-api-key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership record array & page keys.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipListResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Membership search endpoint handler (private)"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.veterancrowd.com/membership-v0-dev",
+      "description": "AWS dev environment."
+    },
+    {
+      "url": "https://api.veterancrowd.com/membership-v0-test",
+      "description": "AWS test environment."
+    },
+    {
+      "url": "https://api.veterancrowd.com/membership-v0",
+      "description": "AWS prod environment."
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public",
+      "description": "Public endpoints."
+    },
+    {
+      "name": "Cognito",
+      "description": "Cognito authenticated endpoints."
+    },
+    {
+      "name": "Private",
+      "description": "API key authenticated endpoints."
+    },
+    {
+      "name": "Membership",
+      "description": "Membership entity endpoints."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "name": "@veterancrowd/aws-service",
+  "version": "5.1.2",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/veterancrowd/aws-service"
+  },
+  "author": "Jason G. Williscroft",
+  "bugs": {
+    "url": "https://github.com/veterancrowd/aws-service/issues"
+  },
+  "description": "AWS service utilities.",
+  "homepage": "https://github.com/veterancrowd/aws-service#readme",
+  "keywords": [
+    "aws"
+  ],
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@aws-sdk/client-api-gateway": "^3.354.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.354.0",
+    "@aws-sdk/client-sfn": "^3.354.0",
+    "@karmaniverous/edge-logger": "^1.2.0",
+    "@middy/core": "^4.5.2",
+    "@middy/http-cors": "^4.5.2",
+    "@middy/http-error-handler": "^4.5.2",
+    "@middy/http-event-normalizer": "^4.5.2",
+    "@middy/http-json-body-parser": "^4.5.2",
+    "@middy/http-response-serializer": "^4.5.2",
+    "@middy/validator": "^4.5.2",
+    "@sentry/serverless": "^7.56.0",
+    "ajv": "^8.12.0",
+    "aws-xray-sdk": "^3.5.0",
+    "commander": "^11.0.0",
+    "http-errors": "^2.0.0",
+    "lodash": "^4.17.21",
+    "openapi-client-axios": "^7.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/eslint-parser": "^7.22.5",
+    "@babel/plugin-syntax-import-assertions": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/register": "^7.22.5",
+    "@karmaniverous/get-dotenv": "^2.4.3",
+    "@types/node": "^20.3.1",
+    "chai": "^4.3.7",
+    "concat-md": "^0.5.1",
+    "eslint": "^8.43.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsdoc": "^46.2.6",
+    "eslint-plugin-mocha": "^10.1.0",
+    "eslint-plugin-yml": "^1.8.0",
+    "jsdoc-to-markdown": "^8.0.0",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "release-it": "^15.11.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
+    }
+  },
+  "main": "./lib/index.js",
+  "mocha": {
+    "exclude": [
+      "./node_modules/**"
+    ],
+    "file": "./test/setup.js",
+    "require": [
+      "@babel/register"
+    ],
+    "spec": "./**/*.test.!(*.*)",
+    "timeout": 10000
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true
+    }
+  },
+  "scripts": {
+    "doc": "jsdoc2md -c doc/jsdoc.config.json -f lib/**/*.* -t doc/api-template.hbs > doc/3-api.jsdoc2.md && concat-md doc --hide-anchor-links > README.md",
+    "lint": "eslint lib/**",
+    "prerelease": "npm run lint && npm run test && npm run doc",
+    "release": "release-it",
+    "test": "getdotenv -c \"mocha\" -p ./ ./env -d dev -y ./env/dynamic.js"
+  },
+  "type": "module"
+}
