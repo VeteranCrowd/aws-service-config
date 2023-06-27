@@ -19,9 +19,10 @@
   ],
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@aws-sdk/client-api-gateway": "^3.358.0",
+    "@aws-sdk/client-api-gateway": "^3.360.0",
     "ajv": "^8.12.0",
     "aws-xray-sdk": "^3.5.0",
+    "exponential-backoff": "^3.1.1",
     "http-errors": "^2.0.0",
     "lodash": "^4.17.21",
     "openapi-client-axios": "^7.2.0"
@@ -33,15 +34,16 @@
     "@babel/preset-env": "^7.22.5",
     "@babel/register": "^7.22.5",
     "@karmaniverous/get-dotenv": "^2.6.7",
-    "@types/node": "^20.3.1",
+    "@types/node": "^20.3.2",
     "chai": "^4.3.7",
     "concat-md": "^0.5.1",
     "eslint": "^8.43.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsdoc": "^46.2.6",
+    "eslint-plugin-jsdoc": "^46.3.0",
     "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-yml": "^1.8.0",
+    "husky": "^8.0.3",
     "jsdoc-to-markdown": "^8.0.0",
     "mocha": "^10.2.0",
     "release-it": "^15.11.0"
@@ -74,6 +76,7 @@
   "scripts": {
     "doc": "jsdoc2md -c doc/jsdoc.config.json -f lib/**/*.* -t doc/api-template.hbs > doc/3-api.jsdoc2.md && concat-md doc --hide-anchor-links > README.md",
     "lint": "eslint lib/**",
+    "prepare": "husky install",
     "prerelease": "npm run lint && npm run test && npm run doc",
     "release": "release-it",
     "test": "getdotenv -c \"mocha\" -p ./ ./env -d dev -y ./env/dynamic.js"
