@@ -18,8 +18,5 @@
     "editor.wordWrap": "bounded"
   },
   "eslint.validate": ["javascript", "javascriptreact", "yaml"],
-  "mochaExplorer.files": "./**/*.test.!(*.*)",
-  "mochaExplorer.env": {
-    "AWS_XRAY_CONTEXT_MISSING": "IGNORE_ERROR"
-  }
+  "mochaExplorer.files": "./**/*.test.!(*.*)"
 }
