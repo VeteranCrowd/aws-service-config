@@ -1,0 +1,16 @@
+
+#!/bin/sh
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REGEX="^(dev|main|preview\/[_a-zA-Z0-9]+|(bugfix|feat|hotfix)\/[a-zA-Z]+-[0-9]+[-_][-_a-zA-Z0-9]+|release\/[0-9]+\.[0-9]+\.[0-9]+)(-[_a-zA-Z0-9]+)?$"
+
+echo $REGEX
+echo $BRANCH
+
+echo $BRANCH
+
+if ! [[ $BRANCH =~ $REGEX ]]; then
+  echo "Branch name invalid. Visit link below for branch naming policy."
+  echo "https://veterancrowdnetwork.atlassian.net/wiki/spaces/TECH/pages/24838145/Git+Flow+VeteranCrowd#Branch-Naming-Policy"
+  exit 1
+fi
