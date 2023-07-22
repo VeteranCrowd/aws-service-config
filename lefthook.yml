@@ -1,3 +1,7 @@
+pre-commit:
+  scripts:
+    branch-naming-policy:
+      runner: bash
 prepare-commit-msg:
   scripts:
     add-jira-ticket:

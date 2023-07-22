@@ -37,6 +37,7 @@
     "@veterancrowd/aws-cli": "^4.3.1",
     "chai": "^4.3.7",
     "concat-md": "^0.5.1",
+    "crlf": "^1.1.1",
     "eslint": "^8.44.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsdoc": "^46.4.3",
@@ -44,7 +45,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-yml": "^1.8.0",
     "jsdoc-to-markdown": "^8.0.0",
-    "lefthook": "^1.4.5",
+    "lefthook": "^1.4.6",
     "mocha": "^10.2.0",
     "release-it": "^16.1.0"
   },
@@ -74,7 +75,7 @@
     }
   },
   "scripts": {
-    "doc": "jsdoc2md -c doc/jsdoc.config.json -f lib/**/*.* -t doc/api-template.hbs > doc/3-api.jsdoc2.md && concat-md doc --hide-anchor-links > README.md",
+    "doc": "jsdoc2md -c doc/jsdoc.config.json -f lib/**/*.* -t doc/api-template.hbs > doc/3-api.jsdoc2.md && concat-md doc --hide-anchor-links > README.md && crlf --set=CRLF README.md",
     "lint": "eslint lib/**",
     "prerelease": "npm run lint && npm run test && npm run doc",
     "release": "release-it",
