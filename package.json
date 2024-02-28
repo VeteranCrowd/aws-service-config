@@ -19,7 +19,7 @@
   ],
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@aws-sdk/client-api-gateway": "^3.511.0",
+    "@aws-sdk/client-api-gateway": "^3.523.0",
     "ajv": "^8.12.0",
     "exponential-backoff": "^3.1.1",
     "http-errors": "^2.0.0",
@@ -32,22 +32,22 @@
     "@babel/plugin-syntax-import-assertions": "^7.23.3",
     "@babel/preset-env": "^7.23.9",
     "@babel/register": "^7.23.7",
-    "@types/node": "^20.11.17",
-    "@veterancrowd/aws-cli": "^4.6.2",
+    "@types/node": "^20.11.21",
+    "@veterancrowd/aws-cli": "^4.6.3",
     "auto-changelog": "^2.4.0",
     "chai": "^5.1.0",
     "concat-md": "^0.5.1",
     "crlf": "^1.1.1",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsdoc": "^48.0.6",
-    "eslint-plugin-mocha": "^10.2.0",
+    "eslint-plugin-jsdoc": "^48.2.0",
+    "eslint-plugin-mocha": "^10.3.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-yml": "^1.12.2",
     "jsdoc-to-markdown": "^8.0.1",
-    "lefthook": "^1.6.1",
+    "lefthook": "^1.6.3",
     "mocha": "^10.3.0",
-    "release-it": "^17.0.3"
+    "release-it": "^17.1.1"
   },
   "exports": {
     ".": {
