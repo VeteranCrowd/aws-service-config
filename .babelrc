@@ -1,3 +1,11 @@
+/*
+******************* DO NOT EDIT THIS NOTICE *****************
+This code and all related intellectual property is owned by  
+Veteran Crowd Rewards, LLC. It is not to be disclosed, copied
+or used without written permission.                          
+*************************************************************
+*/
+
 {
   "ignore": ["**/*.test.cjs", "**/*.test.js", "**/*.test.mjs", "**/*.test.ts"],
   "presets": ["@babel/preset-env"],

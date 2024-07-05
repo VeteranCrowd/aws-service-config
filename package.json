@@ -49,6 +49,7 @@
     "jsdoc-to-markdown": "^8.0.1",
     "knip": "^5.23.3",
     "lefthook": "^1.6.18",
+    "license-check-and-add": "^4.0.5",
     "mocha": "^10.6.0",
     "release-it": "^17.4.1"
   },
