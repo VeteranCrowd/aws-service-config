@@ -16,8 +16,8 @@
   "licenseFormats": {
     "md|mdx": {
       "eachLine": {
-        "prepend": "[//]: # ( ",
-        "append": " )"
+        "prepend": "[//]: # ' ",
+        "append": " '"
       }
     },
     "hbs|html|xml|svg": {
