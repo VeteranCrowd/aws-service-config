@@ -24,7 +24,7 @@
       "prepend": "<!--",
       "append": "-->\n"
     },
-    "js|mjs|cjs|ts|tsx|css|scss|less|php|as|c|java|cpp|go|cto|acl|babelrc|hcl|tf|overrides|variables": {
+    "js|mjs|cjs|ts|tsx|css|scss|less|php|as|c|java|cpp|go|cto|acl|babelrc|hcl|tf|overrides|variables|config": {
       "prepend": "/*",
       "append": "*/\n"
     },
