@@ -1,6 +1,6 @@
 {
   "name": "@veterancrowd/aws-service-config",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "publishConfig": {
     "access": "public"
   },
