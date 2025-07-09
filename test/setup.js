@@ -12,7 +12,7 @@ or used without written permission.
 import { testSetup } from '@veterancrowd/aws-cli';
 
 // Import version from package.json.
-import pkg from '../package.json' assert { type: 'json' };
+import pkg from '../package.json' with { type: 'json' };
 if (!process.env.npm_package_version)
   process.env.npm_package_version = pkg.version;
 

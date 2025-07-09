@@ -12,14 +12,13 @@ Abstracts service connections into a class.
 
 <!--
 ******************* DO NOT EDIT THIS NOTICE *****************
-This code and all related intellectual property is owned by  
+This code and all related intellectual property is owned by
 Veteran Crowd Rewards, LLC. It is not to be disclosed, copied
-or used without written permission.                          
+or used without written permission.
 *************************************************************
 -->
 
 # API Documentation
-
 
 [//]: # ' ******************* DO NOT EDIT THIS NOTICE ***************** '
 [//]: # ' This code and all related intellectual property is owned by   '
@@ -29,5 +28,4 @@ or used without written permission.
 
 ---
 
-See more great templates and other tools on
-[my GitHub Profile](https://github.com/karmaniverous)!
+Built with ❤️ on Bali! Find more great tools & templates on [my GitHub Profile](https://github.com/karmaniverous).
