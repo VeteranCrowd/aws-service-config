@@ -1,9 +1,0 @@
-[//]: # ' ******************* DO NOT EDIT THIS NOTICE ***************** '
-[//]: # ' This code and all related intellectual property is owned by   '
-[//]: # ' Veteran Crowd Rewards, LLC. It is not to be disclosed, copied '
-[//]: # ' or used without written permission.                           '
-[//]: # ' ************************************************************* '
-
----
-
-Built with ❤️ on Bali! Find more great tools & templates on [my GitHub Profile](https://github.com/karmaniverous).

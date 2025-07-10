@@ -19,7 +19,7 @@
   ],
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@aws-sdk/client-api-gateway": "^3.840.0",
+    "@aws-sdk/client-api-gateway": "^3.844.0",
     "ajv": "^8.17.1",
     "exponential-backoff": "^3.1.2",
     "fs-extra": "^11.3.0",
@@ -82,8 +82,7 @@
     "hooks": {
       "after:init": [
         "nr lint",
-        "nr test",
-        "nr doc"
+        "nr test"
       ],
       "after:release": [
         "git switch -c release/${version}",
@@ -97,7 +96,6 @@
   },
   "scripts": {
     "build": "babel lib -d dist/default/lib --delete-dir-on-start --config-file ./dist/default/.babelrc",
-    "doc": "jsdoc2md -c doc/jsdoc.config.json -f lib/**/*.* -t doc/api-template.hbs > doc/3-api.jsdoc2.md && concat-md doc --hide-anchor-links > README.md && crlf --set=CRLF README.md",
     "knip": "knip",
     "lint": "eslint lib/**",
     "release": "vc -c \"release-it\"",
