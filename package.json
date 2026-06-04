@@ -51,7 +51,8 @@
     "lefthook": "^1.12.1",
     "license-check-and-add": "^4.0.5",
     "mocha": "^10.8.2",
-    "release-it": "^17.11.0"
+    "release-it": "^17.11.0",
+    "sinon": "^22.0.0"
   },
   "exports": {
     ".": {
